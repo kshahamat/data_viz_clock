@@ -19,36 +19,36 @@
 //     text(sec, 10, 90);
 // }
 
-let hourRectWidth = 300; // Width of the hour rectangle
-let hourRectHeight = 60; // Height of the hour rectangle
-
-let minuteRectWidth = 300; // Width of the minute rectangle
-let minuteRectHeight = 180; // Height of the minute rectangle
-
-let secondRectWidth = 300; // Width of the second rectangle
-let secondRectHeight = 180; // Height of the second rectangle
-
-let hourSquareSize; // Size of each square for hours
-let minuteSquareSize; // Size of each square for minutes
-let secondSquareSize; // Size of each square for seconds
-
+//setup() is called once at page-load
 function setup() {
-  createCanvas(400, 800); // Create a canvas with extra height for three rectangles
-  hourSquareSize = hourRectWidth / 12; // 12 squares for hours (12-hour format)
-  minuteSquareSize = minuteRectWidth / 10; // 10 squares per row for minutes
-  secondSquareSize = secondRectWidth / 10; // 10 squares per row for seconds
+  createCanvas(400, 700); // make an HTML canvas element width x height pixels
 }
 
+//setting widths and heights for the different rectangles to be filled
+let hourRectWidth = 350; 
+let hourRectHeight = 30; 
+
+let minuteRectWidth = 300; 
+let minuteRectHeight = 180; 
+
+let secondRectWidth = 300; 
+let secondRectHeight = 180; 
+
+let hourSquareSize = hourRectWidth / 12; 
+let minuteSquareSize = minuteRectWidth / 10; 
+let secondSquareSize = secondRectWidth / 10;
+
 function draw() {
-  background(220); // Light gray background
+  let hr = hour() % 12 || 12; 
+  let min = minute(); 
+  let sec = second(); 
 
-  let h = hour() % 12 || 12; // Current hour (12-hour format)
-  let m = minute(); // Current minute (0-59)
-  let s = second(); // Current second (0-59)
+  background(180);
 
-  drawHourRectangle(h); // Draw the hour rectangle filling up with squares
-  drawMinuteRectangle(m); // Draw the minute rectangle filling up with squares
-  drawSecondRectangle(s); // Draw the second rectangle filling up with squares
+  // drawing the rectangles to be filled for each of the time sections
+  drawHourRectangle(hr); 
+  drawMinuteRectangle(min); 
+  drawSecondRectangle(sec); f
 }
 
 function drawHourRectangle(hourCount) {
@@ -65,7 +65,7 @@ function drawHourRectangle(hourCount) {
     let row = floor(i / squaresPerRow); // Current row
     let col = i % squaresPerRow; // Current column
 
-    let x = startX + col * hourSquareSize*11; // X position of the square
+    let x = startX + col * hourSquareSize; // X position of the square
     let y = startY + row * hourSquareSize; // Y position of the square
 
     rect(x, y, hourSquareSize, hourSquareSize); // Draw the square
@@ -78,8 +78,8 @@ function drawHourRectangle(hourCount) {
 }
 
 function drawMinuteRectangle(minuteCount) {
-  let startX = width / 2 - minuteRectWidth / 2; // Center the rectangle horizontally
-  let startY = 300; // Position the minute rectangle below the hour rectangle
+  let startX = width / 2 - minuteRectWidth / 2; 
+  let startY = 300; 
 
   let squaresPerRow = 10; // 10 squares per row
   let totalRows = 6; // Total rows to make 60 squares
@@ -97,7 +97,6 @@ function drawMinuteRectangle(minuteCount) {
     rect(x, y, minuteSquareSize, minuteSquareSize); // Draw the square
   }
 
-  // Draw the rectangle border
   noFill();
   stroke(0);
   rect(startX, startY, minuteRectWidth, minuteRectHeight);
