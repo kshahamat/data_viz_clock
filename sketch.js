@@ -1,6 +1,6 @@
 //setup() is called once at page-load
 function setup() {
-  createCanvas(400, 700); // make an HTML canvas element width x height pixels
+  createCanvas(400, 600); // make an HTML canvas element width x height pixels
 }
 
 //setting widths and heights for the different rectangles to be filled
@@ -18,7 +18,7 @@ let minuteSquareSize = minuteRectWidth / 10;
 let secondSquareSize = secondRectWidth / 10;
 
 function draw() {
-  let hr = hour() % 12 || 12; 
+  let hr = hour() % 12 || 12; //keeping 12 hr formatt
   let min = minute(); 
   let sec = second(); 
 
@@ -27,81 +27,89 @@ function draw() {
   // drawing the rectangles to be filled for each of the time sections
   drawHourRectangle(hr); 
   drawMinuteRectangle(min); 
-  drawSecondRectangle(sec); f
+  drawSecondRectangle(sec);
 }
 
 function drawHourRectangle(hourCount) {
-  let startX = width / 2 - hourRectWidth / 2; // Center the rectangle horizontally
-  let startY = 50; // Position the hour rectangle at the top
+  let startX = width/2- hourRectWidth/2;
+  // let startX = width- hourRectWidth/2;
+  let startY = 30;
+  let squaresPerRow = 12; 
 
-  let squaresPerRow = 12; // One square per hour
-  let totalRows = 1; // Only one row needed for 12 hours
-
-  fill(153, 102, 255); // Purple color for hours
+  // reference: https://processing.org/tutorials/color
+  fill(153, 102, 255);
   noStroke();
 
-  for (let i = 0; i < hourCount; i++) {
-    let row = floor(i / squaresPerRow); // Current row
-    let col = i % squaresPerRow; // Current column
+   //looping to add each of the mini rectangles representing the hours
+  for (let i = 0; i< hourCount; i++) {
+    let row = floor(i/squaresPerRow); 
+    let col = i % squaresPerRow; 
 
-    let x = startX + col * hourSquareSize; // X position of the square
-    let y = startY + row * hourSquareSize; // Y position of the square
+    let x = startX + col * hourSquareSize; 
+    let y = startY + row * hourSquareSize; 
 
-    rect(x, y, hourSquareSize, hourSquareSize); // Draw the square
+    //creating mini rect
+    rect(x, y, hourSquareSize, hourSquareSize); 
   }
 
-  // Draw the rectangle border
+  //creating the border
   noFill();
   stroke(0);
   rect(startX, startY, hourRectWidth, hourRectHeight);
 }
 
+// copying code above for minute with adjustments to make it work for 60 minutes
 function drawMinuteRectangle(minuteCount) {
-  let startX = width / 2 - minuteRectWidth / 2; 
-  let startY = 300; 
+  let startX = width/2 - minuteRectWidth/2; 
+  // let startX = width- hourRectWidth/2;
+  let startY = 100; 
+  let squaresPerRow = 10;
 
-  let squaresPerRow = 10; // 10 squares per row
-  let totalRows = 6; // Total rows to make 60 squares
-
-  fill(255, 102, 51); // Orangey-red color for minutes
+  // reference: https://processing.org/tutorials/color
+  fill(255, 102, 51); 
   noStroke();
 
-  for (let i = 0; i < minuteCount; i++) {
-    let row = floor(i / squaresPerRow); // Current row
-    let col = i % squaresPerRow; // Current column
+   //looping to add each of the mini rectangles representing the mimnnutes
+  for (let i = 0; i< minuteCount; i++) {
+    let row = floor(i/squaresPerRow); 
+    let col = i % squaresPerRow; 
 
-    let x = startX + col * minuteSquareSize; // X position of the square
-    let y = startY + row * minuteSquareSize; // Y position of the square
-
-    rect(x, y, minuteSquareSize, minuteSquareSize); // Draw the square
+    let x = startX + col *minuteSquareSize; 
+    let y = startY + row *minuteSquareSize; 
+    //creating mini rect
+    rect(x, y, minuteSquareSize, minuteSquareSize); 
   }
-
+  
+  //creating the border
   noFill();
   stroke(0);
   rect(startX, startY, minuteRectWidth, minuteRectHeight);
 }
 
+// copying code above for seconds, replacing variable names
 function drawSecondRectangle(secondCount) {
-  let startX = width / 2 - secondRectWidth / 2; // Center the rectangle horizontally
-  let startY = 500; // Position the second rectangle below the minute rectangle
+  let startX = width/2 - secondRectWidth/2; 
+  // let startX = width- hourRectWidth/2;
+  let startY = 330; 
+  let squaresPerRow = 10; 
 
-  let squaresPerRow = 10; // 10 squares per row
-  let totalRows = 6; // Total rows to make 60 squares
-
-  fill(100, 150, 255); // Blue color for seconds
+  // reference: https://processing.org/tutorials/color
+  fill(100, 150, 255); 
   noStroke();
 
-  for (let i = 0; i < secondCount; i++) {
-    let row = floor(i / squaresPerRow); // Current row
-    let col = i % squaresPerRow; // Current column
+  //looping to add each of the mini rectangles representing the seconds
+  for (let i = 0; i< secondCount; i++) {
+    let row = floor(i/squaresPerRow); 
+    let col = i % squaresPerRow; 
 
-    let x = startX + col * secondSquareSize; // X position of the square
-    let y = startY + row * secondSquareSize; // Y position of the square
+    let x = startX + col * secondSquareSize; 
+    let y = startY + row * secondSquareSize;
 
-    rect(x, y, secondSquareSize, secondSquareSize); // Draw the square
+    //creating mini rect
+    rect(x, y, secondSquareSize, secondSquareSize); 
   }
 
-  // Draw the rectangle border
+  // creating border
   noFill();
   stroke(0);
   rect(startX, startY, secondRectWidth, secondRectHeight);
